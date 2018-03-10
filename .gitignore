@@ -1,0 +1,5 @@
+.eggs/*
+Pipfile.lock
+build/*
+src/*egg*
+src/*egg*/*
