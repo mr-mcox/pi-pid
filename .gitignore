@@ -3,3 +3,4 @@ Pipfile.lock
 build/*
 src/*egg*
 src/*egg*/*
+.pytest_cache/*

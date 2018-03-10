@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='pi-pid',
+    name='pi_pid',
     version='0.0.1',
     author='Matthew Cox',
     author_email='mr.mcox@gmail.com',
