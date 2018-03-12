@@ -22,6 +22,7 @@ def test_on_when_high():
     controller(switch, strategy=strat)
     assert switch.state == 'ON'
 
+
 def test_off_when_low():
     sense = Sensor()
     sense.reading = 0
