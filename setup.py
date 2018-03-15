@@ -7,7 +7,7 @@ setup(
     author_email='mr.mcox@gmail.com',
     package_dir={'': 'src'},
     include_package_data=True,
-    install_requires=['click', 'attrs', 'numpy'],
+    install_requires=['click', 'attrs', 'numpy', 'pyyaml'],
     setup_requires=['pytest-runner'],
     tests_require=['pytest'],
     packages=find_packages(where='src'),

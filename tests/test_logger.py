@@ -16,3 +16,10 @@ def test_max_length():
         logger.append(temp=x)
         assert len(logger.temperatures) <= 3
         assert logger.temperatures[-1] == x
+
+
+def test_drop_after_crossing():
+    logger = Logger(drop_after_crossing=5)
+    for x in range(10):
+        logger.append(temp=x)
+    assert logger.temperatures.min() >= 5
