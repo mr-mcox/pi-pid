@@ -22,6 +22,7 @@ class PID():
     kp = attr.ib(default=0)
     kd = attr.ib(default=0)
     ki = attr.ib(default=0)
+    indicator = attr.ib(default=0)
     noise_thresh = attr.ib(default=0.05)
 
     def evaluate(self):
@@ -29,6 +30,7 @@ class PID():
         indicator = (calc.error_current() * self.kp
                      + calc.error_derivative() * self.kd
                      + calc.error_integral() * self.ki)
+        self.indicator = indicator
         if indicator < -1 * self.noise_thresh:
             return 'on'
         elif indicator > self.noise_thresh:

@@ -24,7 +24,10 @@ def cli(mode, setpoint, config, logfile, wait_time):
 
     sensor = Sensor()
     switch = Switch()
-    logger = Logger(file=logfile, sensor=sensor, **conf['logger'])
+    drop_thresh = setpoint - 1
+    logger = Logger(file=logfile, sensor=sensor,
+                    drop_after_crossing=drop_thresh,
+                    **conf['logger'])
     calculator = Calculator(set_point=setpoint,
                             logger=logger, **conf['calculator'])
     strategy = None
@@ -38,7 +41,8 @@ def cli(mode, setpoint, config, logfile, wait_time):
             logger.record_sensor()
             lr = sensor.last_reading
             state = switch.state
-            print(f'\r{lr}°C State:{state}')
+            indicator = strategy.indicator
+            print(f'\r{lr}°C State:{state} Ind:{indicator:.3f}')
             controller(switch=switch, strategy=strategy)
             time.sleep(wait_time)
     except KeyboardInterrupt:
