@@ -29,6 +29,7 @@ class Sensor():
         assert equals_pos != -1
         temp_string = lines[1][equals_pos + 2:]
         temp_c = float(temp_string) / 1000.0
+        self.last_reading = temp_c
         return temp_c
 
 
@@ -52,3 +53,6 @@ class Switch():
             io.output(self.power_pin, True)
         elif state == 'OFF':
             io.output(self.power_pin, False)
+
+    def cleanup(self):
+        io.cleanup()
