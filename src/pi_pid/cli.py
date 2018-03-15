@@ -16,10 +16,13 @@ def cli(setpoint, logfile):
     logger = Logger(file=logfile)
     calculator = Calculator(set_point=setpoint, sensor=sensor, logger=logger)
     relay = Relay(calculator=calculator)
-    for x in range(5):
-        print(f'{sensor.last_reading}°C State:{switch.state}')
-        controller(switch=switch, strategy=relay)
-        time.sleep(5)
+    try:
+        while True:
+            print(f'{sensor.last_reading}°C State:{switch.state}')
+            controller(switch=switch, strategy=relay)
+            time.sleep(5)
+    except KeyboardInterrupt:
+        pass
     switch.cleanup()
 
 
