@@ -23,7 +23,7 @@ def cli(setpoint, logfile, wait_time):
             lr = sensor.last_reading
             state = switch.state
             error = calculator.error_current()
-            print(f'{lr}°C State:{state} Error: {error}')
+            print(f'\r{lr}°C State:{state} Error: {error}')
             controller(switch=switch, strategy=relay)
             time.sleep(wait_time)
     except KeyboardInterrupt:

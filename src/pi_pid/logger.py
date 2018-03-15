@@ -1,13 +1,14 @@
 import math
 import attr
 import time
+import numpy as np
 
 
 @attr.s
 class Logger():
     sensor = attr.ib(default=None)
-    temperatures = attr.ib(default=list())
-    times = attr.ib(default=list())
+    temperatures = attr.ib(default=np.array(list()))
+    times = attr.ib(default=np.array(list()))
     max_len = attr.ib(default=math.inf)
     file = attr.ib(default=None)
 
@@ -21,11 +22,11 @@ class Logger():
 
     def append(self, temp=None):
         cur_time = time.monotonic()
-        self.temperatures.append(temp)
-        self.times.append(cur_time)
+        self.temperatures = np.append(self.temperatures, [temp])
+        self.times = np.append(self.times, [cur_time])
         if self.file is not None:
             with open(self.file, 'a') as fh:
                 fh.write(f'{cur_time},{temp}\n')
         if len(self.times) > self.max_len:
-            self.temperatures.pop(0)
-            self.times.pop(0)
+            self.temperatures = self.temperatures[1:]
+            self.times = self.times[1:]
