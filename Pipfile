@@ -9,6 +9,7 @@ name = "pypi"
 
 attrs = "*"
 click = "*"
+numpy = "*"
 
 
 [dev-packages]

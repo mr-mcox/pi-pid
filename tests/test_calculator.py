@@ -4,8 +4,9 @@ from pi_pid.hardware.mock import Sensor
 
 
 def test_error_current():
-    logger = Logger()
     sensor = Sensor()
+    logger = Logger(sensor=sensor)
     sensor.reading = 14
-    calc = Calculator(set_point=15, logger=logger, sensor=sensor)
+    logger.record_sensor()
+    calc = Calculator(set_point=15, logger=logger)
     assert calc.error_current() == -1

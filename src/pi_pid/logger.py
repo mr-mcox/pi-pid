@@ -5,15 +5,19 @@ import time
 
 @attr.s
 class Logger():
+    sensor = attr.ib(default=None)
     temperatures = attr.ib(default=list())
     times = attr.ib(default=list())
     max_len = attr.ib(default=math.inf)
     file = attr.ib(default=None)
 
-    def __init__(self):
+    def __attrs_post_init__(self):
         if self.file is not None:
             with open(self.file, 'w') as fh:
                 fh.write('time,temperature\n')
+
+    def record_sensor(self):
+        self.append(temp=self.sensor.read())
 
     def append(self, temp=None):
         cur_time = time.monotonic()

@@ -10,17 +10,22 @@ from .logger import Logger
 @click.command()
 @click.option('--setpoint', default=60.0)
 @click.option('--logfile', default=None)
-def cli(setpoint, logfile):
+@click.option('--wait-time', default=10)
+def cli(setpoint, logfile, wait_time):
     sensor = Sensor()
     switch = Switch()
-    logger = Logger(file=logfile)
-    calculator = Calculator(set_point=setpoint, sensor=sensor, logger=logger)
+    logger = Logger(file=logfile, sensor=sensor)
+    calculator = Calculator(set_point=setpoint, logger=logger)
     relay = Relay(calculator=calculator)
     try:
         while True:
-            print(f'{sensor.last_reading}°C State:{switch.state}')
+            logger.record_sensor()
+            lr = sensor.last_reading
+            state = switch.state
+            error = calculator.error_current()
+            print(f'{lr}°C State:{state} Error: {error}')
             controller(switch=switch, strategy=relay)
-            time.sleep(5)
+            time.sleep(wait_time)
     except KeyboardInterrupt:
         pass
     switch.cleanup()
