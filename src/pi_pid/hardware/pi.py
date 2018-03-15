@@ -10,10 +10,12 @@ class Sensor():
     reading = attr.ib(default=15.0)
 
     def __init__(self):
+        print('Initializing sensor')
         os.system('modprobe w1-gpio')
         os.system('modprobe w1-therm')
 
         self.device_file = '/sys/bus/w1/devices/28-000004f117ea/w1_slave'
+        print(self.device_file)
 
     def read_probe(self):
         with open(self.device_file) as s:
