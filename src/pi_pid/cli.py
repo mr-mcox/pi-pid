@@ -42,7 +42,7 @@ def cli(mode, setpoint, config, logfile, wait_time):
             lr = sensor.last_reading
             state = switch.state
             indicator = strategy.indicator
-            print(f'\r{lr}°C State:{state} Ind:{indicator:.3f}')
+            print(f'\r{lr}°C State:{state} Ind:{indicator:.5f}')
             controller(switch=switch, strategy=strategy)
             time.sleep(wait_time)
     except KeyboardInterrupt:
