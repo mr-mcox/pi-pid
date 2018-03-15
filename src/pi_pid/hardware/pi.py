@@ -14,6 +14,7 @@ class Sensor():
     def __attrs_post_init__(self):
         os.system('modprobe w1-gpio')
         os.system('modprobe w1-therm')
+        self.last_reading = None
 
     def read_probe(self):
         with open(self.device_file) as s:
