@@ -8,14 +8,12 @@ import RPi.GPIO as io
 class Sensor():
 
     reading = attr.ib(default=15.0)
+    device_file = attr.ib(
+        default='/sys/bus/w1/devices/28-000004f117ea/w1_slave')
 
-    def __init__(self):
-        print('Initializing sensor')
+    def __attrs_post_init__(self):
         os.system('modprobe w1-gpio')
         os.system('modprobe w1-therm')
-
-        self.device_file = '/sys/bus/w1/devices/28-000004f117ea/w1_slave'
-        print(self.device_file)
 
     def read_probe(self):
         with open(self.device_file) as s:
