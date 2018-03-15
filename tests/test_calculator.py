@@ -34,9 +34,10 @@ def test_integral():
     temps = np.array([1, 3, 7])
     logger.temperatures = temps
     logger.times = np.arange(3)
-    calc = Calculator(logger=logger)
+    calc = Calculator(logger=logger, set_point=0)
     exp_integral = np.sum(temps[1:] + temps[:-1]) / 2
     assert calc.error_integral() == exp_integral
+
 
 def test_integral_short():
     logger = Logger()
@@ -45,4 +46,3 @@ def test_integral_short():
     logger.times = np.array([5])
     calc = Calculator(logger=logger)
     assert calc.error_integral() == 0
-

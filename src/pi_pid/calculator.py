@@ -23,7 +23,7 @@ class Calculator():
 
     def error_integral(self):
         times = self.logger.times
-        temps = self.logger.temperatures
+        temps = self.logger.temperatures - self.set_point
         heights = (temps[1:] + temps[:-1]) / 2
         widths = times[1:] - times[:-1]
         return np.sum(heights * widths)
