@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='pi_pid',
-    version='0.3.1',
+    version='0.3.2',
     author='Matthew Cox',
     author_email='mr.mcox@gmail.com',
     package_dir={'': 'src'},
