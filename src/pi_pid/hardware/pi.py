@@ -37,7 +37,7 @@ class Switch():
 
     state = attr.ib(default='off')
 
-    def __init__(self):
+    def __attrs_post_init__(self):
         # Set up power
         io.setmode(io.BCM)
         power_pin = 23
