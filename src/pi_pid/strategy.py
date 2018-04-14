@@ -5,6 +5,7 @@ import attr
 class Relay():
     calculator = attr.ib()
     noise_thresh = attr.ib(default=0.15)
+    indicator = attr.ib(default=0)
 
     def evaluate(self):
         error_current = self.calculator.error_current()
